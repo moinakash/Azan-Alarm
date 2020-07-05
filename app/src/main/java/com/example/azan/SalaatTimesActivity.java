@@ -5,13 +5,17 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.azan.fragments.InitialConfigFragment;
 import com.example.azan.fragments.KaabaLocatorFragment;
@@ -23,7 +27,15 @@ import com.example.azan.util.ScreenUtils;
 import com.example.azan.widget.FragmentStatePagerAdapter;
 import com.example.azan.widget.SlidingTabLayout;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.HijrahDate;
+import java.util.Calendar;
+import java.util.Locale;
 
+
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class SalaatTimesActivity extends AppCompatActivity implements Constants,
     InitialConfigFragment.OnOptionSelectedListener, ViewPager.OnPageChangeListener,
     LocationHelper.LocationCallback {
@@ -34,6 +46,11 @@ public class SalaatTimesActivity extends AppCompatActivity implements Constants,
   private ViewPager mPager;
   private ScreenSlidePagerAdapter mAdapter;
   private SlidingTabLayout mTabs;
+
+  private TextView BTV,ATV;
+  String text;
+  int sum = 0;
+  int mm = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +74,7 @@ public class SalaatTimesActivity extends AppCompatActivity implements Constants,
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
+    date();
     mLocationHelper = (LocationHelper) getFragmentManager().findFragmentByTag(LOCATION_FRAGMENT);
 
     // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
@@ -101,6 +119,42 @@ public class SalaatTimesActivity extends AppCompatActivity implements Constants,
 //        }
 //      }, 2000);
 //    }
+
+
+
+  }
+
+
+  private void date() {
+
+
+    BTV = (TextView) findViewById(R.id.bangladate);
+    ATV = (TextView) findViewById(R.id.arbidate);
+
+    Locale locale = new Locale("bn");
+    Locale.setDefault(locale);
+    Configuration config =
+            getBaseContext().getResources().getConfiguration();
+    config.setLocale(locale);
+
+    createConfigurationContext(config);
+
+    Calendar cl = Calendar.getInstance(locale);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy ");
+
+    HijrahDate islamyDate = null;
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+      islamyDate = HijrahChronology.INSTANCE.date(LocalDate.of(cl.get(Calendar.YEAR), cl.get(Calendar.MONTH) + 1, cl.get(Calendar.DATE)));
+      text = islamyDate.toString();
+      text = text.replace("Hijrah-umalqura AH", "");
+    }
+    if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O) {
+      text = "Its only for android orio";
+
+    }
+
+    ATV.setText(text);
+
   }
 
   @Override

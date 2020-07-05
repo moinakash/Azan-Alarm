@@ -31,7 +31,7 @@ public class OnboardingActivity extends AppCompatActivity implements OnOnboardin
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     ScreenUtils.lockOrientation(this);
-    setContentView(R.layout.activity_onboarding);
+   // setContentView(R.layout.activity_onboarding);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     // Instantiate a ViewPager and a PagerAdapter.
