@@ -48,7 +48,7 @@ public class SalaatTimesActivity extends AppCompatActivity implements Constants,
   private SlidingTabLayout mTabs;
 
   private TextView BTV,ATV;
-  String text;
+  public String text;
   int sum = 0;
   int mm = 0;
 
@@ -147,13 +147,49 @@ public class SalaatTimesActivity extends AppCompatActivity implements Constants,
       islamyDate = HijrahChronology.INSTANCE.date(LocalDate.of(cl.get(Calendar.YEAR), cl.get(Calendar.MONTH) + 1, cl.get(Calendar.DATE)));
       text = islamyDate.toString();
       text = text.replace("Hijrah-umalqura AH", "");
-    }
-    if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O) {
-      text = "Its only for android orio";
+
+      ////////////////////////////////////////////////////////////////////////////////////
+
+      ///////////////////////////////////////////////////////////////////////////
+
+
+      text = text.replace("0", "০");
+      text = text.replace("1", "১");
+      text = text.replace("2", "২");
+      text = text.replace("3", "৩");
+      text = text.replace("4", "৪");
+      text = text.replace("5", "৫");
+      text = text.replace("6", "৬");
+      text = text.replace("7", "৭");
+      text = text.replace("8", "৮");
+      text = text.replace("9", "৯");
+
+
+      //////////////////////////////////////////////////////
+
+      text = text.replace("-০১-", ",মহরম,");
+      text = text.replace("-০2-", "সফল");
+      text = text.replace("-০৩-", "রবিউল আউয়াল");
+      text = text.replace("-০৪-", "রবিউস সানি");
+      text = text.replace("-০৫-", "জমাদিউল আউয়াল");
+      text = text.replace("-০৬-", "জমাদিউস সানি");
+      text = text.replace("-০৭-", "রজব");
+      text = text.replace("-০৮-", "শাবান");
+      text = text.replace("-০৯-", "রমজান");
+      text = text.replace("-১০-", "শওয়াল");
+      text = text.replace("-১১-", ",জিলক্বদ,");
+      text = text.replace("-১২-", "জিলহজ্জ");
+      ATV.setText(text+" হিঃ");
 
     }
 
-    ATV.setText(text);
+//    }
+//    if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.O) {
+//      text = "Its only for android orio";
+//
+//    }
+
+    ATV.setText(text+" হিঃ");
 
   }
 
