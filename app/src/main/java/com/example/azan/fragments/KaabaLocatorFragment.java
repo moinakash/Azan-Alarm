@@ -81,31 +81,31 @@ public class KaabaLocatorFragment extends Fragment implements Constants, OnMapRe
     mSensorManager = (SensorManager) activity.getSystemService(Activity.SENSOR_SERVICE);
   }
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                           Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    View view = inflater.inflate(R.layout.fragment_kaaba_locator, container, false);
-    view.findViewById(R.id.grant).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        checkPermissions();
-      }
-    });
-    return view;
-  }
+//  @Override
+//  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                           Bundle savedInstanceState) {
+////    // Inflate the layout for this fragment
+////    View view = inflater.inflate(R.layout.fragment_kaaba_locator, container, false);
+////    view.findViewById(R.id.grant).setOnClickListener(new View.OnClickListener() {
+////      @Override
+////      public void onClick(View v) {
+////        checkPermissions();
+////      }
+////    });
+//   // return view;
+//  }
 
-  private boolean checkPermissions() {
-    if (!PermissionUtil.hasSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-      if (!sWriterExternalPermissionDenied) {
-        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL);
-      } else {
-        // Perhaps inform the user why they aren't seeing anything.
-      }
-      return false;
-    }
-    return true;
-  }
+//  private boolean checkPermissions() {
+//    if (!PermissionUtil.hasSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//      if (!sWriterExternalPermissionDenied) {
+//        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_EXTERNAL);
+//      } else {
+//        // Perhaps inform the user why they aren't seeing anything.
+//      }
+//      return false;
+//    }
+//    return true;
+//  }
 
   public void showMap() {
     if (!PermissionUtil.hasSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -161,7 +161,7 @@ public class KaabaLocatorFragment extends Fragment implements Constants, OnMapRe
     //21.4224698,39.8262066
     LatLng kaaba = new LatLng(21.4224698, 39.8262066);
 
-    mMap.setMyLocationEnabled(true);
+   // mMap.setMyLocationEnabled(true);
     mMap.getUiSettings().setMyLocationButtonEnabled(true);
     mMap.getUiSettings().setCompassEnabled(false);
     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startPosition, 13));
